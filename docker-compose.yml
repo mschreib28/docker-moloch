@@ -1,0 +1,36 @@
+version: '3'
+
+volumes:
+  moloch:
+
+services:
+  elasticsearch:
+    image: elasticsearch:5.6.8-alpine
+    volumes: 
+      - ./elasticsearch:/usr/share/elasticsearch/data
+  moloch:
+    build:
+       context: .
+    image: piesecurity/docker-moloch
+    environment:
+#Make this line true on first execution and false every other time
+      - INITALIZEDB=true
+      - MOLOCH_PASSWORD=PASSWORDCHANGEME
+      - MOLOCH_VERSION=1.1.0-1_amd64
+      - UBUNTU_VERSION=16.04
+      - ES_HOST=elasticsearch
+      - ES_PORT=9200
+      - MOLOCH_INTERFACE=eth0
+      - CAPTURE=off
+      - VIEWER=on
+      - WIPEDB=false
+    depends_on:
+      - elasticsearch
+    ports:
+      - 0.0.0.0:8005:8005
+    volumes:
+      - ./tcpdump:/data/pcap
+      - ./etc:/data/moloch/etc
+      - ./logs:/data/moloch/logs
+      - ./raw:/data/moloch/raw
+      - moloch:/data/configured
