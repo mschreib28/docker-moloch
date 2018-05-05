@@ -1,13 +1,13 @@
 
 ## Docker Moloch container
 
-Image is based on the [ubuntu](https://registry.hub.docker.com/u/ubuntu/) base image
-
+Image is based on the [ubuntu](https://registry.hub.docker.com/u/ubuntu/) base image  
+Designed to get up and running quickly. Loads the viewer by default allowing you to parse large PCAPS within minutes.  
 ## Built on the excellent work of these 3 projects
 
-https://github.com/MathieM/docker-moloch
-https://github.com/MathieM/docker-compose-moloch
-https://github.com/danielguerra69
+https://github.com/MathieM/docker-moloch  
+https://github.com/MathieM/docker-compose-moloch  
+https://github.com/danielguerra69  
 
 ## Quick Start - Linux
 0-preq. Install Docker
@@ -33,15 +33,17 @@ MOLOCH_PASSWORD=PASSWORDCHANGEME
 ```
 sudo docker-compose up
 ```
-4. Visit http://127.0.0.1:8005 with your favorite web browser
-username: admin
-password: Defined in Step #2
+4. Visit http://127.0.0.1:8005 with your favorite web browser  
+username: admin  
+password: Defined in Step #2  
 
 ## Importing PCAPs
 1. Place all PCAPs in the folder ./tcpdump
 2. Run the following command with the container running
+```
 docker exec docker-moloch_moloch_1 moloch-parse-pcap-folder.sh
 
+```
 ## Running
 
 ### Keep ElasticSearch Persistant
@@ -50,13 +52,13 @@ Change this line in docker-compose.yml to 'false'
 INITALIZEDB=true
 ```
 
-### Wipe your Elastic Search DB but keep all your users and configs
+### Wipe your ElasticSearch DB but keep all your users and configs
 Run the following command with the container running
 ```
 docker exec docker-moloch_moloch_1 wipemoloch.sh
 
 ```
-### Configure Elastic Search to wipe each startup but keep your users and configs
+### Configure ElasticSearch to wipe each startup but keep your users and configs
 Change this line in docker-compose.yml to 'false'
 ```
 INITALIZEDB=true
