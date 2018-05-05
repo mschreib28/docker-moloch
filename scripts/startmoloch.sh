@@ -16,7 +16,7 @@ fi
 #Give option to init ElasticSearch
 if [ "$INITALIZEDB" = "true" ] ; then
 	echo INIT | /data/moloch/db/db.pl http://$ES_HOST:$ES_PORT init
-	/data/moloch/bin/moloch_add_user.sh admin "Admin User" $MOLOCH_ADMIN_PASSWORD --admin
+	/data/moloch/bin/moloch_add_user.sh admin "Admin User" $MOLOCH_PASSWORD --admin
 fi
 #Give option to wipe ElasticSearch
 if [ "$WIPEDB" = "true" ]; then
@@ -28,7 +28,7 @@ echo "  /data/moloch/logs/viewer.log"
 echo "  /data/moloch/logs/capture.log"
 echo "Visit http://127.0.0.1:8005 with your favorite browser."
 echo "  user: admin"
-echo "  password: $MOLOCH_ADMIN_PASSWORD"
+echo "  password: $MOLOCH_PASSWORD"
 
 if [ "$CAPTURE" = "on" ]
 then

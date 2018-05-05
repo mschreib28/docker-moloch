@@ -16,6 +16,7 @@ services:
 #Make this line true on first execution and false every other time
       - INITALIZEDB=true
       - MOLOCH_PASSWORD=PASSWORDCHANGEME
+      - WIPEDB=false
       - MOLOCH_VERSION=1.1.0-1_amd64
       - UBUNTU_VERSION=16.04
       - ES_HOST=elasticsearch
@@ -23,7 +24,6 @@ services:
       - MOLOCH_INTERFACE=eth0
       - CAPTURE=off
       - VIEWER=on
-      - WIPEDB=false
     depends_on:
       - elasticsearch
     ports:
