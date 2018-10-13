@@ -10,15 +10,18 @@ https://github.com/MathieM/docker-compose-moloch
 https://github.com/danielguerra69  
 
 ## Quick Start - Linux
-0-preq. Install Docker
+Step 0 Prerequisites. Install Docker // Docker Compose // Configure Kernel
 ```
+#Install Docker
 curl -fsSL get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
-```
-0-preq. Install Docker Compose
-```
+
+#Install Docker Compose
 sudo curl -L https://github.com/docker/compose/releases/download/1.21.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
+
+#Increase Max Map Count for Elastic Search
+sysctl -w vm.max_map_count=262144
 ```
 1. Clone the repository
 ```
@@ -47,9 +50,9 @@ docker exec docker-moloch_moloch_1 moloch-parse-pcap-folder.sh
 ## Running
 
 ### Keep ElasticSearch Persistant
-Change this line in docker-compose.yml to 'false'
+Change this line in docker-compose.yml from 'true' to 'false'
 ```
-INITALIZEDB=true
+INITALIZEDB=
 ```
 
 ### Wipe your ElasticSearch DB but keep all your users and configs
@@ -59,11 +62,11 @@ docker exec docker-moloch_moloch_1 wipemoloch.sh
 
 ```
 ### Configure ElasticSearch to wipe each startup but keep your users and configs
-Change this line in docker-compose.yml to 'false'
+Change this line in docker-compose.yml from 'true' to 'false'
 ```
-INITALIZEDB=true
+INITALIZEDB=
 ```
-Change this line in docker-compose.yml to 'true'
+Change this line in docker-compose.yml from 'true' to 'false'
 ```
-WIPEDB=true
+WIPEDB=
 ```
