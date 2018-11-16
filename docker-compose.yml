@@ -20,7 +20,7 @@ services:
       - INITALIZEDB=true
       - MOLOCH_PASSWORD=PASSWORDCHANGEME
       - WIPEDB=false
-      - MOLOCH_VERSION=1.5.3-1_amd64
+      - MOLOCH_VERSION=1.6.1-1_amd64
       - UBUNTU_VERSION=18.04
       - ES_HOST=elasticsearch
       - ES_PORT=9200
