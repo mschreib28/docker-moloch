@@ -1,12 +1,12 @@
 FROM ubuntu:18.04
-MAINTAINER piesecurity <admin@pie-secure.org>
+MAINTAINER rodgermoore <mr_rodger_moore@hotmail.com>
 
 RUN apt-get -qq update && \
 apt-get -qq update && \
 apt-get install -yq  wget curl libpcre3-dev uuid-dev libmagic-dev pkg-config g++ flex bison zlib1g-dev libffi-dev gettext libgeoip-dev make libjson-perl libbz2-dev libwww-perl libpng-dev xz-utils libffi-dev python libssl-dev libyaml-dev ethtool && \
 rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 # Declare args
-ARG MOLOCH_VERSION=1.6.1-1_amd64
+ARG MOLOCH_VERSION=1.8.0-1_amd64
 ARG UBUNTU_VERSION=18.04
 ARG ES_HOST=elasticsearch
 ARG ES_PORT=9200
@@ -49,6 +49,3 @@ EXPOSE 8005
 WORKDIR /data/moloch
 
 ENTRYPOINT ["/data/startmoloch.sh"]
-  
-
-
