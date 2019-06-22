@@ -7,7 +7,7 @@ Designed to get up and running quickly. Loads the viewer by default allowing you
 
 https://github.com/MathieM/docker-moloch  
 https://github.com/MathieM/docker-compose-moloch  
-https://github.com/danielguerra69
+https://github.com/danielguerra69  
 https://github.com/piesecurity/docker-moloch
 
 ## Quick Start - Linux
