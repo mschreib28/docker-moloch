@@ -1,0 +1,23 @@
+instances:
+  - name: es-node1
+    dns:
+      - node1
+      - localhost
+      - es-node1.yourdomain.com
+      - elasticsearch
+    ip:
+      - 127.0.0.1
+  - name: kibana
+    dns:
+      - localhost
+      - kibana.yourdomain.com
+      - kibana
+    ip:
+      - 127.0.0.1
+  - name: moloch
+    dns:
+      - moloch
+      - localhost
+      - moloch.yourdomain.com
+    ip:
+      - 127.0.0.1

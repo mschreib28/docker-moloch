@@ -1,0 +1,27 @@
+version: '2.2'
+services:
+  create_certs:
+    container_name: create_certs
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.8.0
+    command: >
+      bash -c '
+        if [[ ! -d config/certificates ]]; then
+          mkdir config/certificates;
+        fi;
+        if [[ ! -f config/certificates/ca/ca.crt ]]; then
+          mkdir config/certificates/ca;
+          bin/elasticsearch-certutil ca -s --days 3650 --ca-dn "CN=${CA_CN}" --pem --pass "${CA_PASS}" --out config/certificates/ca/ca_bundle.zip;
+          unzip config/certificates/ca/ca_bundle.zip -d config/certificates;
+          rm -rf config/certificates/ca/ca_bundle.zip;
+        fi;
+        if [[ ! -d config/certificates/instances ]]; then
+          mkdir config/certificates/instances;
+          bin/elasticsearch-certutil cert -s --pem --ca-cert config/certificates/ca/ca.crt --ca-key config/certificates/ca/ca.key --ca-pass "$CA_PASS" --in config/certificates/instances.yml --out config/certificates/instances/bundle.zip;
+          unzip config/certificates/instances/bundle.zip -d config/certificates/instances;
+          rm -rf config/certificates/instances/bundle.zip;
+        fi;
+        chgrp -R 0 config/certificates
+      '
+    user: ${UID:-1000}
+    working_dir: /usr/share/elasticsearch
+    volumes: ['./certificates:/usr/share/elasticsearch/config/certificates']
