@@ -6,4 +6,4 @@ do
     sleep 1
 done
 #Wipe is the same initalize except it keeps users intact
-echo WIPE | /data/moloch/db/db.pl http://$ES_HOST:$ES_PORT wipe
+echo WIPE | /data/moloch/db/db.pl https://$ELASTIC_USERNAME:$ELASTIC_PASSWORD@elasticsearch:9200 wipe
