@@ -119,7 +119,8 @@ Kibana: Visit https://localhost:5601 with your favourite web browser
 username: elastic  
 password: Defined in Step #3  
 More info on how to use Kibana: https://www.elastic.co/guide/en/kibana/6.8/index.html  
-To create a Kibana index pattern define: "sessions*" to use Moloch data. Choose "firstPacket" as the "Time Filter Field Name".
+  
+To create a Kibana index pattern define: "sessions*" to use Moloch data (after indexing pcap files). Choose "firstPacket" as the "Time Filter Field Name".
 
 ## Importing PCAPs  
 1. Place all PCAPs in the folder ./tcpdump  
