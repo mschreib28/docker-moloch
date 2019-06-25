@@ -36,8 +36,11 @@ sysctl -w vm.max_map_count=262144
 git clone https://github.com/rodgermoore/docker-moloch.git
 cd ./docker-moloch
 ```
-3. Change (environmental) variables in .env, ./certificates/instances.yml, config.ini
-.env
+3. Change (environmental) variables in .env
+  ./certificates/instances.yml
+  config.ini
+
+*.env*
 ```
 # CERTIFICATES
 CA_CN=The Change Me Organisation
@@ -62,7 +65,7 @@ MOLOCH_ES_HOST=elasticsearch
 MOLOCH_PASSWORD=ThisPasswordIsBadNews
 ```
 
-./certificates/instances.yml
+*./certificates/instances.yml*
 ```
 instances:
   - name: es-node1
@@ -90,7 +93,7 @@ instances:
 
 ```
 
-config.ini
+*config.ini*
 ```
 # Change this accordingly to password in .env.
 elasticsearch=https://elastic:ThisPassWordIsSoRandomItHurtsMyEyes@elasticsearch:9200
