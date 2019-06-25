@@ -92,7 +92,7 @@ instances:
 
 config.ini
 ```
-# Change this accordingly to password in .env. This needs to be re-coded with env variable in the future.
+# Change this accordingly to password in .env. **This needs to be re-coded with env variable in the future.**
 elasticsearch=https://elastic:ThisPassWordIsSoRandomItHurtsMyEyes@elasticsearch:9200
 ```
 
