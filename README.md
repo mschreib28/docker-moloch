@@ -133,7 +133,7 @@ docker exec **moloch_container_name** moloch-parse-pcap-folder.sh
 ### Keep ElasticSearch Persistant
 Change this line in docker-compose.yml from 'true' to 'false'
 ```
-INITALIZEDB=
+INITALIZEDB=true
 ```
 
 ### Wipe your ElasticSearch DB but keep all your users and configs
@@ -152,4 +152,4 @@ Change this line in docker-compose.yml from 'true' to 'false'
 WIPEDB=
 ```
 
-#HAVE FUN!
+# HAVE FUN!
