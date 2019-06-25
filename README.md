@@ -111,7 +111,7 @@ sudo docker-compose up
 ```
 Visit https://localhost:8005 with your favourite web browser
 username: admin  
-password: Defined in Step #2  
+password: Defined in Step #2
 
 ## Importing PCAPs
 1. Place all PCAPs in the folder ./tcpdump
