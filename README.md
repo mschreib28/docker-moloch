@@ -111,11 +111,11 @@ Optionally, add the generated ./certificates/ca/ca.crt file to your OS's trust s
 ```
 sudo docker-compose up
 ```
-Moloch: Visit https://localhost:8005 with your favourite web browser
+Moloch: Visit https://localhost:8005 with your favourite web browser  
 username: admin  
 password: Defined in Step #3
 
-Kibana: Visit https://localhost:5601 with your favourite web browser
+Kibana: Visit https://localhost:5601 with your favourite web browser  
 username: elastic
 password: Defined in Step #3
 More info on how to use Kibana: https://www.elastic.co/guide/en/kibana/6.8/index.html
