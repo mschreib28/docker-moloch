@@ -98,11 +98,18 @@ config.ini
 elasticsearch=https://elastic:ThisPassWordIsSoRandomItHurtsMyEyes@elasticsearch:9200
 ```
 
-3. Bring up the Moloch Viewer
+4. Generate Root and Elasticsearch, Kibana, Moloch certificates
+```
+docker-compose -f create-certs.yml up
+```
+Backup your ca.crt and ca.key file if you want to re-use it later.
+Optionally, add the generated ./certificates/ca/ca.crt file to your OS's trust store to prevent browser warnings.
+
+5. Bring up the stack
 ```
 sudo docker-compose up
 ```
-4. Visit http://127.0.0.1:8005 with your favourite web browser  
+Visit https://localhost:8005 with your favourite web browser
 username: admin  
 password: Defined in Step #2  
 
