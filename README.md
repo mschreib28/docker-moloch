@@ -1,5 +1,5 @@
 
-## Docker Moloch container
+## Docker Moloch on a fully secured Elasticsearch, Kibana stack!
 
 Image is based on the [ubuntu](https://registry.hub.docker.com/u/ubuntu/) base image  
 Designed to get up and running quickly. Loads the viewer by default allowing you to parse large PCAPS within minutes.  
@@ -10,34 +10,99 @@ https://github.com/MathieM/docker-compose-moloch
 https://github.com/danielguerra69  
 https://github.com/piesecurity/docker-moloch
 
+## Setup summary
+1. Setup prerequisites
+2. Clone the repository
+3. Set variables
+4. Generate Root and Elasticsearch, Kibana, Moloch certificates
+5. Bring up the stack
+6. Initialise Moloch
+7. Visit your secure Kibana and Moloch dashboards
+
 ## Quick Start - Linux
-Step 0 Prerequisites. Install Docker // Docker Compose // Configure Kernel
+1. Prerequisites. Install Docker // Docker Compose // Configure Kernel
 ```
 #Install Docker
 curl -fsSL get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 
 #Install Docker Compose
-sudo curl -L https://github.com/docker/compose/releases/download/1.21.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+sudo curl -L https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 
 #Increase Max Map Count for Elastic Search
 sysctl -w vm.max_map_count=262144
 ```
-1. Clone the repository
+2. Clone the repository
 ```
-git clone https://github.com/piesecurity/docker-moloch.git
+git clone https://github.com/rodgermoore/docker-moloch.git
 cd ./docker-moloch
 ```
-2. Change this line in docker-compose.yml
+3. Change (environmental) variables in .env, ./certificates/instances.yml, config.ini
+.env
 ```
-MOLOCH_PASSWORD=PASSWORDCHANGEME
+#CERTIFICATES
+CA_CN=The Change Me Organisation
+CA_PASS=CHANGE_THIS_PASS
+CERTS_DIR=/usr/share/elasticsearch/config/certificates
+
+#ES KIBANA VERSION
+ES_KI_VERSION=6.8.0
+
+#ELASTICSEARCH
+ELASTIC_NAME=es-node1
+ELASTIC_USERNAME=elastic
+ELASTIC_PASSWORD=ThisPassWordIsSoRandomItHurtsMyEyes
+
+#KIBANA
+KIBANA_NAME=kibana
+
+#MOLOCH
+MOLOCH_NAME=moloch
+MOLOCH_VERSION=1.8.0
+MOLOCH_ES_HOST=elasticsearch
+MOLOCH_PASSWORD=ThisPasswordIsBadNews
 ```
+
+./certificates/instances.yml
+```
+instances:
+  - name: es-node1
+    dns:
+      - node1
+      - localhost
+      - es-node1.yourdomain.com
+      - elasticsearch
+    ip:
+      - 127.0.0.1
+  - name: kibana
+    dns:
+      - localhost
+      - kibana.yourdomain.com
+      - kibana
+    ip:
+      - 127.0.0.1
+  - name: moloch
+    dns:
+      - moloch
+      - localhost
+      - moloch.yourdomain.com
+    ip:
+      - 127.0.0.1
+
+```
+
+config.ini
+```
+#Change this accordingly to password in .env. This needs to be re-coded with env variable in the future.
+elasticsearch=https://elastic:ThisPassWordIsSoRandomItHurtsMyEyes@elasticsearch:9200
+```
+
 3. Bring up the Moloch Viewer
 ```
 sudo docker-compose up
 ```
-4. Visit http://127.0.0.1:8005 with your favorite web browser  
+4. Visit http://127.0.0.1:8005 with your favourite web browser  
 username: admin  
 password: Defined in Step #2  
 

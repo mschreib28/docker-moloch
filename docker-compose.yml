@@ -74,9 +74,9 @@ services:
      environment:
      #Make this line true on first execution and false every other time
        - INITALIZEDB=true
-       - MOLOCH_PASSWORD=CHANGEME
+       - MOLOCH_PASSWORD=${MOLOCH_PASSWORD}
        - WIPEDB=false
-       - MOLOCH_VERSION=$MOLOCH_VERSION-1_amd64
+       - MOLOCH_VERSION=${MOLOCH_VERSION}-1_amd64
        - UBUNTU_VERSION=18.04
        - ES_HOST=$ELASTIC_USERNAME:$ELASTIC_PASSWORD@$MOLOCH_ES_HOST
        - ES_PORT=9200
@@ -91,15 +91,20 @@ services:
      ports:
        - 0.0.0.0:8005:8005
      volumes:
+       # SSL/TLS security stuff
+       - ./certificates:/data/moloch/certs
+       - ./certificates/ca:/usr/local/share/ca-certificates/root-certificate
+       # Moloch scripts
        - ./scripts/moloch-parse-pcap-folder.sh:/data/moloch-parse-pcap-folder.sh
        - ./scripts/startmoloch.sh:/data/startmoloch.sh
        - ./scripts/wipemoloch.sh:/data/wipemoloch.sh
        - ./scripts/moloch_add_user.sh:/data/moloch/bin/moloch_add_user.sh
+       # Pcap folder
        - ./tcpdump:/data/pcap
+       - ./raw:/data/moloch/raw
+       # Config stuff
        - ./etc:/data/moloch/etc
        - ./etc/Configure.sh:/data/moloch/bin/Configure
-       - ./logs:/data/moloch/logs
-       - ./raw:/data/moloch/raw
-       - ./certificates:/data/moloch/certs
-       - ./certificates/ca:/usr/local/share/ca-certificates/root-certificate
        - moloch:/data/configured
+       # Logs
+       - ./logs:/data/moloch/logs
