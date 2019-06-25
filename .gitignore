@@ -4,3 +4,5 @@
 /tcpdump
 /etc/GeoLite2-ASN.mmdb.gz
 /etc/GeoLite2-Country.mmdb.gz
+/certificates/ca
+/certificates/instances
