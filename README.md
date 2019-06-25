@@ -109,7 +109,7 @@ Optionally, add the generated ./certificates/ca/ca.crt file to your OS's trust s
 
 5. Bring up the stack
 ```
-sudo docker-compose up
+sudo docker-compose up -d
 ```
 Moloch: Visit https://localhost:8005 with your favourite web browser  
 username: admin  
@@ -119,7 +119,7 @@ Kibana: Visit https://localhost:5601 with your favourite web browser
 username: elastic  
 password: Defined in Step #3  
 More info on how to use Kibana: https://www.elastic.co/guide/en/kibana/6.8/index.html  
-  
+
 To create a Kibana index pattern define: "sessions*" to use Moloch data (after indexing pcap files). Choose "firstPacket" as the "Time Filter Field Name".
 
 ## Importing PCAPs  
