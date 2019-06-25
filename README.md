@@ -16,21 +16,19 @@ https://github.com/piesecurity/docker-moloch
 3. Set variables
 4. Generate Root and Elasticsearch, Kibana, Moloch certificates
 5. Bring up the stack
-6. Initialise Moloch
-7. Visit your secure Kibana and Moloch dashboards
 
 ## Quick Start - Linux
 1. Prerequisites. Install Docker // Docker Compose // Configure Kernel
 ```
-#Install Docker
+# Install Docker
 curl -fsSL get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 
-#Install Docker Compose
+# Install Docker Compose
 sudo curl -L https://github.com/docker/compose/releases/download/1.24.1/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 
-#Increase Max Map Count for Elastic Search
+# Increase Max Map Count for Elastic Search
 sysctl -w vm.max_map_count=262144
 ```
 2. Clone the repository
@@ -41,23 +39,23 @@ cd ./docker-moloch
 3. Change (environmental) variables in .env, ./certificates/instances.yml, config.ini
 .env
 ```
-#CERTIFICATES
+# CERTIFICATES
 CA_CN=The Change Me Organisation
 CA_PASS=CHANGE_THIS_PASS
 CERTS_DIR=/usr/share/elasticsearch/config/certificates
 
-#ES KIBANA VERSION
+# ES KIBANA VERSION
 ES_KI_VERSION=6.8.0
 
-#ELASTICSEARCH
+# ELASTICSEARCH
 ELASTIC_NAME=es-node1
 ELASTIC_USERNAME=elastic
 ELASTIC_PASSWORD=ThisPassWordIsSoRandomItHurtsMyEyes
 
-#KIBANA
+# KIBANA
 KIBANA_NAME=kibana
 
-#MOLOCH
+# MOLOCH
 MOLOCH_NAME=moloch
 MOLOCH_VERSION=1.8.0
 MOLOCH_ES_HOST=elasticsearch
@@ -94,7 +92,7 @@ instances:
 
 config.ini
 ```
-#Change this accordingly to password in .env. This needs to be re-coded with env variable in the future.
+# Change this accordingly to password in .env. This needs to be re-coded with env variable in the future.
 elasticsearch=https://elastic:ThisPassWordIsSoRandomItHurtsMyEyes@elasticsearch:9200
 ```
 
@@ -102,22 +100,28 @@ elasticsearch=https://elastic:ThisPassWordIsSoRandomItHurtsMyEyes@elasticsearch:
 ```
 docker-compose -f create-certs.yml up
 ```
-Backup your ca.crt and ca.key file if you want to re-use it later.
+Backup your ca.crt and ca.key file from ./certificates/ca/ if you want to re-use it later.
 Optionally, add the generated ./certificates/ca/ca.crt file to your OS's trust store to prevent browser warnings.
 
 5. Bring up the stack
 ```
 sudo docker-compose up
 ```
-Visit https://localhost:8005 with your favourite web browser
+Moloch: Visit https://localhost:8005 with your favourite web browser
 username: admin  
-password: Defined in Step #2
+password: Defined in Step #3
+
+Kibana: Visit https://localhost:5601 with your favourite web browser
+username: elastic
+password: Defined in Step #3
+More info on how to use Kibana: https://www.elastic.co/guide/en/kibana/6.8/index.html
+To create a Kibana index pattern define: "sessions*" to use Moloch data. Choose "firstPacket" as the "Time Filter Field Name".
 
 ## Importing PCAPs
 1. Place all PCAPs in the folder ./tcpdump
 2. Run the following command with the container running
 ```
-docker exec docker-moloch_moloch_1 moloch-parse-pcap-folder.sh
+docker exec **moloch_container_name** moloch-parse-pcap-folder.sh
 
 ```
 ## Running
@@ -131,7 +135,7 @@ INITALIZEDB=
 ### Wipe your ElasticSearch DB but keep all your users and configs
 Run the following command with the container running
 ```
-docker exec docker-moloch_moloch_1 wipemoloch.sh
+docker exec **moloch_container_name** wipemoloch.sh
 
 ```
 ### Configure ElasticSearch to wipe each startup but keep your users and configs
@@ -143,3 +147,5 @@ Change this line in docker-compose.yml from 'true' to 'false'
 ```
 WIPEDB=
 ```
+
+#HAVE FUN!
