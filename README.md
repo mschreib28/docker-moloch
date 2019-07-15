@@ -93,7 +93,7 @@ instances:
 
 ```
 
-*config.ini*
+*/etc/config.ini*
 ```
 # Change this accordingly to password in .env.
 elasticsearch=https://elastic:ThisPassWordIsSoRandomItHurtsMyEyes@elasticsearch:9200
@@ -131,7 +131,7 @@ docker exec **moloch_container_name** moloch-parse-pcap-folder.sh
 ```
 ## Running
 
-### Keep ElasticSearch Persistant
+### Keep ElasticSearch Persistent
 Change this line in docker-compose.yml from 'true' to 'false'
 ```
 INITALIZEDB=false
