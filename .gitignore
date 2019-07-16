@@ -6,4 +6,4 @@
 /etc/GeoLite2-Country.mmdb.gz
 /certificates/ca
 /certificates/instances
-*.mmdb
+/etc/*.mmdb
