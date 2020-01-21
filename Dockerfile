@@ -1,18 +1,18 @@
 FROM ubuntu:18.04
-MAINTAINER rodgermoore <mr_rodger_moore@hotmail.com>
+MAINTAINER piesecurity <admin@pie-secure.org>
 
 RUN apt-get -qq update && \
 apt-get -qq update && \
 apt-get install -yq  wget curl libpcre3-dev uuid-dev libmagic-dev pkg-config g++ flex bison zlib1g-dev libffi-dev gettext libgeoip-dev make libjson-perl libbz2-dev libwww-perl libpng-dev xz-utils libffi-dev python libssl-dev libyaml-dev ethtool && \
 rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 # Declare args
-ARG MOLOCH_VERSION=1.8.0-1_amd64
+ARG MOLOCH_VERSION=2.2.1-1_amd64
 ARG UBUNTU_VERSION=18.04
 ARG ES_HOST=elasticsearch
 ARG ES_PORT=9200
 ARG MOLOCH_PASSWORD=PASSWORDCHANGEME
-ARG MOLOCH_INTERFACE=eth0
-ARG CAPTURE=off
+ARG MOLOCH_INTERFACE=enp0s5
+ARG CAPTURE=on
 ARG VIEWER=on
 #Initalize is used to reset the environment from scratch and rebuild a new ES Stack
 ARG INITALIZEDB=false
